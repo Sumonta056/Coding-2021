@@ -49,8 +49,8 @@ using namespace std;
         cout << i << " "; \
     cout << endl;
 
-#define max3(a, b, c) max(max((a), (b)), (c))
-#define min3(a, b, c) min(min((a), (b)), (c))
+#define max3(a,b,c) max(max((a),(b)),(c))
+#define min3(a,b,c) min(min((a),(b)),(c))
 
 #define cin(n) cin >> n
 #define cin2(a, b) cin >> a >> b;
@@ -71,7 +71,7 @@ using namespace std;
     cin.tie(NULL);                    \
     cout.tie(NULL)
 
-int mod = 1e5 ;
+#define mod 1000000007
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
@@ -82,50 +82,36 @@ const int N = int(1e5 + 3);
 //* char a = 'A';   int num = (int) a;
 //* char a = '2';   int num = a-48;
 
-ll mod_mul(ll a, ll b)
-{
-    a = a % mod;
-    b = b % mod;
-    return (((a * b) % mod) + mod) % mod;
-}
-ll mod_add(ll a, ll b)
-{
-    a = a % mod;
-    b = b % mod;
-    return (((a + b) % mod) + mod) % mod;
-}
+ll mod_mul(ll a, ll b) {a = a % mod; b = b % mod; return (((a * b) % mod) + mod) % mod;}
+ll mod_add(ll a, ll b) {a = a % mod; b = b % mod; return (((a + b) % mod) + mod) % mod;}
 
 int main()
 {
     fast;
-    int n;
-    cin >> n;
 
-    ll arr[N];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    ll start = arr[0];
-
-    ll count = 0;
-    ll low = arr[0];
-
-    for (int i = 1; i < n; i++)
+    int t;
+    cin >> t;
+    
+    while(t--)
     {
-        if (arr[i] > start)
+
+        int n ;
+        cin >> n ;
+
+        int arr[n] ;
+
+        for(int i = 0 ; i < n  ; i++)
         {
-            count = (start - low);
-            start = arr[i];
-            low = arr[i];
+            cin >> arr[i] ;
         }
 
-        else
-        {
-            low = min(arr[i], low);
-        }
+        sort(arr , arr+n) ;
+
+        ll ans = (ll)(arr[n-1]- arr[0]) * arr[n-2] ;
+        
+
+        cout << ans << endl;
+    
     }
-
-    count = count + (start - low);
-
-    cout << count << endl;
+    
 }

@@ -36,7 +36,6 @@ using namespace std;
 #define alls(a) (a).begin(), (a).end()
 #define sz(x) (int)x.size()
 
-#define Size(s) s.length()
 #define all(v) (v.begin, v.end)
 #define rev(v) reverse(v.begin, v.end)
 #define srt(v) sort(v.begin, v.end)
@@ -71,7 +70,7 @@ using namespace std;
     cin.tie(NULL);                    \
     cout.tie(NULL)
 
-int mod = 1e5 ;
+#define mod 1000000007
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
@@ -98,34 +97,63 @@ ll mod_add(ll a, ll b)
 int main()
 {
     fast;
-    int n;
-    cin >> n;
+    int t;
+    cin >> t;
 
-    ll arr[N];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    ll start = arr[0];
-
-    ll count = 0;
-    ll low = arr[0];
-
-    for (int i = 1; i < n; i++)
+    while (t--)
     {
-        if (arr[i] > start)
+        ll a, s;
+        cin >> a >> s;
+
+        vll b;
+        bool notpossible = false;
+
+        while (s)
         {
-            count = (start - low);
-            start = arr[i];
-            low = arr[i];
+            ll x = a % 10;
+            ll y = s % 10;
+
+            if (x <= y)
+                b.push_back(y - x);
+
+            else
+            {
+                s /= 10;
+
+                y += 10 * (s % 10);
+
+                if (x < y && y >= 10 && y < 19)
+                    b.push_back(y - x);
+                else
+                {
+                    notpossible = true;
+                    break;
+                }
+            }
+
+            a /= 10;
+            s /= 10;
         }
 
-        else
+        if (notpossible || a)
         {
-            low = min(arr[i], low);
+            cout << -1 << endl;
+            continue ;
         }
+
+        reverse(b.begin() , b.end()) ;
+
+        bool check = false;
+        for (int f = 0; f < b.size(); f++)
+        {
+            if (b[f] == 0 && check == false)
+                continue;
+            else
+            {
+                cout << b[f];
+                check = true;
+            }
+        }
+        cout << endl;
     }
-
-    count = count + (start - low);
-
-    cout << count << endl;
 }

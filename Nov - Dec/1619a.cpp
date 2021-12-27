@@ -36,7 +36,7 @@ using namespace std;
 #define alls(a) (a).begin(), (a).end()
 #define sz(x) (int)x.size()
 
-#define Size(s) s.length()
+#define size(s) s.length()
 #define all(v) (v.begin, v.end)
 #define rev(v) reverse(v.begin, v.end)
 #define srt(v) sort(v.begin, v.end)
@@ -71,7 +71,7 @@ using namespace std;
     cin.tie(NULL);                    \
     cout.tie(NULL)
 
-int mod = 1e5 ;
+#define mod 1000000007
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
@@ -98,34 +98,37 @@ ll mod_add(ll a, ll b)
 int main()
 {
     fast;
-    int n;
-    cin >> n;
+    int t;
+    cin >> t;
 
-    ll arr[N];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    ll start = arr[0];
-
-    ll count = 0;
-    ll low = arr[0];
-
-    for (int i = 1; i < n; i++)
+    while (t--)
     {
-        if (arr[i] > start)
+        string s;
+        cin >> s;
+
+        int size = s.length();
+
+        if (size % 2 != 0)
         {
-            count = (start - low);
-            start = arr[i];
-            low = arr[i];
+            cout << "NO" << endl;
+            continue;
         }
 
+        bool check = true;
+        int end = size / 2;
+
+        for (int i = 0; i < end; i++)
+        {
+            if (s[i] != s[end + i])
+            {
+                check = false;
+                break;
+            }
+        }
+
+        if (check)
+            cout << "YES" << endl;
         else
-        {
-            low = min(arr[i], low);
-        }
+            cout << "NO" << endl;
     }
-
-    count = count + (start - low);
-
-    cout << count << endl;
 }

@@ -71,7 +71,7 @@ using namespace std;
     cin.tie(NULL);                    \
     cout.tie(NULL)
 
-int mod = 1e5 ;
+#define mod 1000000007
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
@@ -98,34 +98,41 @@ ll mod_add(ll a, ll b)
 int main()
 {
     fast;
-    int n;
-    cin >> n;
+    string s;
+    cin >> s;
 
-    ll arr[N];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    ll start = arr[0];
+    ll size = s.length();
 
     ll count = 0;
-    ll low = arr[0];
 
-    for (int i = 1; i < n; i++)
+    ll check = 0;
+    ll arr[200]={0} ;
+
+
+    for(int i = 0 ; i < size ; i++)
     {
-        if (arr[i] > start)
-        {
-            count = (start - low);
-            start = arr[i];
-            low = arr[i];
-        }
+        char c = s[i] ;
 
-        else
-        {
-            low = min(arr[i], low);
-        }
+        int a = (int)c;
+        //cout << a << endl;
+
+        arr[a]=arr[a] + 1;
+
+        check = max(check , arr[a]);
+    }
+    //cout << check <<endl;
+
+    if(check == 0)
+    {
+        cout << size << endl;
+        return 0 ;
     }
 
-    count = count + (start - low);
+    for (int i = 0; i < 200; i++)
+    {
+        count = count + arr[i] * arr[i] ;   
+        //cout << count << endl;
+    }
 
     cout << count << endl;
 }

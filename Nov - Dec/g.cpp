@@ -71,11 +71,10 @@ using namespace std;
     cin.tie(NULL);                    \
     cout.tie(NULL)
 
-int mod = 1e5 ;
+#define mod 10000007
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
-const int N = int(1e5 + 3);
 
 #define fo(i, a, b) for (int i = a; i <= b; i++)
 
@@ -95,37 +94,36 @@ ll mod_add(ll a, ll b)
     return (((a + b) % mod) + mod) % mod;
 }
 
+int isPrime[mod];
+
+void doSeive()
+{
+    for (ll i = 2; i <= mod; i++)
+    {
+        for (int j = 2; i * j <= mod; j++)
+        {
+            isPrime[j * i] = 1;
+        }
+    }
+}
+
 int main()
 {
     fast;
-    int n;
+    doSeive();
+
+    ll n;
     cin >> n;
 
-    ll arr[N];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    ll start = arr[0];
-
-    ll count = 0;
-    ll low = arr[0];
-
-    for (int i = 1; i < n; i++)
+    for (ll i = 2;; i++)
     {
-        if (arr[i] > start)
-        {
-            count = (start - low);
-            start = arr[i];
-            low = arr[i];
-        }
+        ll a = i;
+        ll b = a + n;
 
-        else
+        if (isPrime[a] == 1 && isPrime[b] == 1)
         {
-            low = min(arr[i], low);
+            cout << b << sp << a << endl;
+            break;
         }
     }
-
-    count = count + (start - low);
-
-    cout << count << endl;
 }

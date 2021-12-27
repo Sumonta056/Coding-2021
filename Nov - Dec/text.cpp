@@ -1,30 +1,36 @@
+// CPP program to illustrate
+// std::find
+// CPP program to illustrate
+// std::find
 #include<bits/stdc++.h>
-using namespace std;
-/*
-    *
-    * Prosen Ghosh
-    * American International University - Bangladesh (AIUB)
-    *
-*/
-bool checkUgly(int num){
 
-    while(num % 2 == 0)num/=2;
-    while(num % 3 == 0)num/=3;
-    while(num % 5 == 0)num/=5;
-
-    return (num == 1) ? true : false;
-}
-int main(){
-
-
-    int uglyNumber = 0,cnt = 1;
-    for(int i = 1; cnt <= 1500;i++){
-        uglyNumber++;
-        if(checkUgly(uglyNumber))cnt++;
-    }
-    printf("The 1500'th ugly number is %d.\n",uglyNumber);
-    
-
-   // printf("The 1500'th ugly number is 859963392.\n");
-    return 0;
+int main ()
+{
+	std::vector<int> vec { 10, 20, 40, 30 };
+	
+	// Iterator used to store the position
+	// of searched element
+	std::vector<int>::iterator it;
+	
+	// Print Original Vector
+	std::cout << "Original vector :";
+	for (int i=0; i<vec.size(); i++)
+		std::cout << " " << vec[i];
+		
+	std::cout << "\n";
+	
+	// Element to be searched
+	int ser = 30;
+	
+	// std::find function call
+	it = std::find (vec.begin(), vec.end(), ser);
+	if (it != vec.end())
+	{
+		std::cout << "Element " << ser <<" found at position : " ;
+		std::cout << it - vec.begin() << " (counting from zero) \n" ;
+	}
+	else
+		std::cout << "Element not found.\n\n";
+		
+	return 0;
 }

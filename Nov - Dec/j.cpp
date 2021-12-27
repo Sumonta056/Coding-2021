@@ -71,7 +71,7 @@ using namespace std;
     cin.tie(NULL);                    \
     cout.tie(NULL)
 
-int mod = 1e5 ;
+#define mod 1000007
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
@@ -112,20 +112,22 @@ int main()
 
     for (int i = 1; i < n; i++)
     {
-        if (arr[i] > start)
-        {
-            count = (start - low);
-            start = arr[i];
-            low = arr[i];
-        }
+        // if (arr[i] > start)
+        // {
+        //     count = count + (start - low);
+        //     start = arr[i];
+        //     low = arr[i];
+        // }
 
-        else
-        {
-            low = min(arr[i], low);
-        }
+        // else
+        // {
+        //     low = min(arr[i], low);
+        // }
+
+        if( arr[i] < arr[i-1]) count += (arr[i-1] - arr[i]) ;
     }
 
-    count = count + (start - low);
+    //count = count + (start - low);
 
     cout << count << endl;
 }

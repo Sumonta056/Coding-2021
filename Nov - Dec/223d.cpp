@@ -71,11 +71,11 @@ using namespace std;
     cin.tie(NULL);                    \
     cout.tie(NULL)
 
-int mod = 1e5 ;
+#define mod 1000000007
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
-const int N = int(1e5 + 3);
+const int N = int(1e6 + 3);
 
 #define fo(i, a, b) for (int i = a; i <= b; i++)
 
@@ -95,37 +95,36 @@ ll mod_add(ll a, ll b)
     return (((a + b) % mod) + mod) % mod;
 }
 
+vector<ll> arr(N);
+ll n , k;
+ll count = 0 ;
+
+void maxSubArraySum()
+{
+    int max_so_far = k, max_ending_here = 0;
+ 
+    for (int i = 0; i < n; i++)
+    {
+        max_ending_here = max_ending_here + arr[i];
+        if (max_so_far < max_ending_here)
+            max_so_far = max_ending_here;
+ 
+        if (max_ending_here < 0)
+            max_ending_here = 0;
+    }
+}
+
 int main()
 {
     fast;
-    int n;
-    cin >> n;
-
-    ll arr[N];
+    cin >> n >> k;
+    
     for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    ll start = arr[0];
-
-    ll count = 0;
-    ll low = arr[0];
-
-    for (int i = 1; i < n; i++)
     {
-        if (arr[i] > start)
-        {
-            count = (start - low);
-            start = arr[i];
-            low = arr[i];
-        }
-
-        else
-        {
-            low = min(arr[i], low);
-        }
+        cin >> arr[i];
     }
 
-    count = count + (start - low);
+    maxSubArraySum();
 
-    cout << count << endl;
+    cout << count << endl; 
 }

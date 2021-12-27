@@ -71,7 +71,7 @@ using namespace std;
     cin.tie(NULL);                    \
     cout.tie(NULL)
 
-int mod = 1e5 ;
+#define mod 1000000007
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
@@ -95,37 +95,58 @@ ll mod_add(ll a, ll b)
     return (((a + b) % mod) + mod) % mod;
 }
 
+int isVowel(char ch)
+{
+    return (0x208222 >> (ch & 0x1f)) & 1;
+}
+
 int main()
 {
     fast;
-    int n;
-    cin >> n;
+    int t;
+    cin >> t;
 
-    ll arr[N];
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    ll start = arr[0];
-
-    ll count = 0;
-    ll low = arr[0];
-
-    for (int i = 1; i < n; i++)
+    while (t--)
     {
-        if (arr[i] > start)
+        int n;
+        cin >> n;
+
+        string s, p;
+        cin >> s;
+        cin >> p;
+
+        ll ans = 1e12;
+        ll count = 0;
+
+        for (char i = 'a'; i <= 'z'; i++)
         {
-            count = (start - low);
-            start = arr[i];
-            low = arr[i];
+            count = 0;
+
+            for (int j = 0; j < n; j++)
+            {
+                char a = s[j];
+                char b = p[j];
+
+                if (a == '?')
+                    a = i;
+                if (b == '?')
+                    b = i;
+
+                if (a == b)
+                    continue;
+
+                    
+                if (isVowel(a) && isVowel(b))
+                    count += 2;
+                else if (!isVowel(a) && !isVowel(b))
+                    count += 2;
+                else
+                    count++;
+            }
+
+            ans = min(ans, count);
         }
 
-        else
-        {
-            low = min(arr[i], low);
-        }
+        cout << ans << endl;
     }
-
-    count = count + (start - low);
-
-    cout << count << endl;
 }
