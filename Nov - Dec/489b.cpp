@@ -101,37 +101,37 @@ ll mod_add(ll a, ll b)
 int main()
 {
     fast;
-    ll n, k;
-    cin >> k >> n;
+    int n;
+    cin >> n;
 
-    if( n == 1) return 0 ;
+    int boy[n];
+    for (int i = 0; i < n; i++)
+        cin >> boy[i];
 
-    vector<ll> v;
-    for (ll i = 1; i <= sqrt(n); i++)
+    int m;
+    cin >> m;
+
+    int girl[m];
+    for (int i = 0; i < m; i++)
+        cin >> girl[i];
+
+    sort(boy, boy + n);
+    sort(girl, girl + m);
+
+    ll count = 0;
+
+    for (int i = 0; i < n; i++)
     {
-        if (n % i == 0)
-        {   
-            if( i == 1) continue;
-
-            if (n / i == i)
-                v.push_back(i);
-            else
+        for (int j = 0; j < m; j++)
+        {
+            if (boy[i] == girl[j] || abs(boy[i] - girl[j]) == 1)
             {
-                v.push_back(i);
-                v.push_back(n / i);
+                count++;
+                boy[i] = -10;
+                girl[j] = -10;
             }
         }
     }
 
-    ll ans = 0 ; 
-
-    if(k >= n) ans = 2 ;
-    else ans = 0;
-
-    for(auto it : v)
-    {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
-    }
-    cout << ans << endl;
+    cout << count << endl;
 }

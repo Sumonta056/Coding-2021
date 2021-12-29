@@ -77,10 +77,7 @@ using namespace std;
 #define NINF numeric_limits<ll>::min();
 const int N = int(1e5 + 3);
 
-#define foi(i, a, b) for (int i = a; i < b; i++)
-#define foI(i, a, b) for (int i = a; i <= b; i++)
-#define fol(i, a, b) for (ll i = a; i < b; i++)
-#define foL(i, a, b) for (ll i = a; i <= b; i++)
+#define fo(i, a, b) for (int i = a; i <= b; i++)
 
 //* char a = 'A';   int num = (int) a;
 //* char a = '2';   int num = a-48;
@@ -101,37 +98,45 @@ ll mod_add(ll a, ll b)
 int main()
 {
     fast;
-    ll n, k;
-    cin >> k >> n;
 
-    if( n == 1) return 0 ;
+    int t;
+    cin >> t;
 
-    vector<ll> v;
-    for (ll i = 1; i <= sqrt(n); i++)
+    while (t--)
     {
-        if (n % i == 0)
-        {   
-            if( i == 1) continue;
+        vll arr(3);
+        int odd = 0, even = 0;
 
-            if (n / i == i)
-                v.push_back(i);
+        for (int i = 0; i < 3; i++)
+        {
+            cin >> arr[i];
+            if (arr[i] % 2 == 0)
+                even++;
             else
-            {
-                v.push_back(i);
-                v.push_back(n / i);
-            }
+                odd++;
         }
+
+        sort(arr.begin(), arr.end());
+
+        if (odd == 3)
+            cout << "NO" << endl;
+
+        else if (even == 3 || even == 1)
+        {
+            if (arr[0] + arr[1] == arr[2])
+                cout << "YES" << endl;
+
+            else if (arr[0] == arr[1] && arr[2] == arr[1])
+                cout << "YES" << endl;
+
+            else if (arr[0] == arr[1] || arr[2] == arr[1])
+                cout << "YES" << endl;
+
+            else
+                cout << "NO" << endl;
+        }
+
+        else
+            cout << "NO" << endl;
     }
-
-    ll ans = 0 ; 
-
-    if(k >= n) ans = 2 ;
-    else ans = 0;
-
-    for(auto it : v)
-    {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
-    }
-    cout << ans << endl;
 }

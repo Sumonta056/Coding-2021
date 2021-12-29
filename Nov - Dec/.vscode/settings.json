@@ -5,6 +5,8 @@
         "xstring": "cpp",
         "vector": "cpp",
         "ratio": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "xutility": "cpp",
+        "map": "cpp"
     }
 }

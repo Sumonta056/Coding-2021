@@ -75,12 +75,9 @@ using namespace std;
 #define inf 1000000000000000005
 #define INF numeric_limits<ll>::max();
 #define NINF numeric_limits<ll>::min();
-const int N = int(1e5 + 3);
+const int N = int(1e6 + 3);
 
-#define foi(i, a, b) for (int i = a; i < b; i++)
-#define foI(i, a, b) for (int i = a; i <= b; i++)
-#define fol(i, a, b) for (ll i = a; i < b; i++)
-#define foL(i, a, b) for (ll i = a; i <= b; i++)
+#define fo(i, a, b) for (int i = a; i <= b; i++)
 
 //* char a = 'A';   int num = (int) a;
 //* char a = '2';   int num = a-48;
@@ -101,37 +98,31 @@ ll mod_add(ll a, ll b)
 int main()
 {
     fast;
-    ll n, k;
-    cin >> k >> n;
+    ll n;
+    cin >> n;
 
-    if( n == 1) return 0 ;
+    vll a;
+    ll ans1 = n ;
+    ll ans2 = 0;
 
-    vector<ll> v;
-    for (ll i = 1; i <= sqrt(n); i++)
+    while (n != 0)
     {
-        if (n % i == 0)
-        {   
-            if( i == 1) continue;
-
-            if (n / i == i)
-                v.push_back(i);
-            else
-            {
-                v.push_back(i);
-                v.push_back(n / i);
-            }
-        }
+        a.push_back(n % 10);
+        n /= 10;
     }
 
-    ll ans = 0 ; 
+    reverse(a.begin(), a.end());
 
-    if(k >= n) ans = 2 ;
-    else ans = 0;
+    while (a.back() == 0)
+        a.pop_back();
 
-    for(auto it : v)
+    reverse(a.begin(), a.end());
+
+    for (ll i = 0; i < a.size(); i++)
     {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
+        ans2 = ans2 + pow(10,i) * a[i] ;   
     }
-    cout << ans << endl;
+
+    if(ans1 == ans2) cout << "true" <<endl;
+    else cout << "false" <<endl ;
 }

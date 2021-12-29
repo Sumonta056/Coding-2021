@@ -98,40 +98,58 @@ ll mod_add(ll a, ll b)
     return (((a + b) % mod) + mod) % mod;
 }
 
+vll A(8);
+vll B(8);
+
+// void decToBinary(int n)
+// {
+
+//     for (int i = 7; i >= 0; i--)
+//     {
+//         int k = n >> i;
+//         if (k & 1)
+//             // cout << "1";
+//             A[7-i] = 1;
+//         else
+//             // cout << "0";
+//             A[7-i] = 0;
+//     }
+// }
+
+// void decTobinary(int n)
+// {
+
+//     for (int i = 7; i >= 0; i--)
+//     {
+//         int k = n >> i;
+//         if (k & 1)
+//             // cout << "1";
+//             B[7-i] = 1;
+//         else
+//             // cout << "0";
+//             B[7-i] = 0;
+//     }
+// }
+
 int main()
 {
     fast;
-    ll n, k;
-    cin >> k >> n;
 
-    if( n == 1) return 0 ;
+    int a, b;
+    cin >> a >> b;
 
-    vector<ll> v;
-    for (ll i = 1; i <= sqrt(n); i++)
-    {
-        if (n % i == 0)
-        {   
-            if( i == 1) continue;
+    // decToBinary(a);
+    // decTobinary(b);
 
-            if (n / i == i)
-                v.push_back(i);
-            else
-            {
-                v.push_back(i);
-                v.push_back(n / i);
-            }
-        }
-    }
+    // for (auto it : A)
+    //     cout << it << " ";
+    
+    // cout<<endl;
 
-    ll ans = 0 ; 
+    // for(auto it: B)
+    // cout << it << " ";
+    // cout << endl;
 
-    if(k >= n) ans = 2 ;
-    else ans = 0;
-
-    for(auto it : v)
-    {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
-    }
-    cout << ans << endl;
+    cout << (a^b) ;
+    
 }

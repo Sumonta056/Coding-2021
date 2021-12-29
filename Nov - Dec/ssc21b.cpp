@@ -104,34 +104,44 @@ int main()
     ll n, k;
     cin >> k >> n;
 
-    if( n == 1) return 0 ;
+    if (n == 1)
+    {
+        cout << 1 << endl;
+        return 0;
+    }
+    ll ans = 0;
+
+    if (k >= n)
+        ans = 2;
+    else
+        ans = 0;
 
     vector<ll> v;
     for (ll i = 1; i <= sqrt(n); i++)
     {
         if (n % i == 0)
-        {   
-            if( i == 1) continue;
+        {
+            if (i == 1)
+                continue;
 
             if (n / i == i)
-                v.push_back(i);
+            {
+                if (i <= k)
+                    ans++;
+            }
             else
             {
-                v.push_back(i);
-                v.push_back(n / i);
+                if (i <= k && (n / i) <= k)
+                    ans += 2;
             }
         }
     }
 
-    ll ans = 0 ; 
-
-    if(k >= n) ans = 2 ;
-    else ans = 0;
-
-    for(auto it : v)
-    {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
-    }
+    // for (auto it : v)
+    // {
+    //     if (it > 1 && it <= k)
+    //         ans++;
+    //     cout << it << " ";
+    // }
     cout << ans << endl;
 }

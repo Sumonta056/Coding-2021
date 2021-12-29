@@ -77,10 +77,7 @@ using namespace std;
 #define NINF numeric_limits<ll>::min();
 const int N = int(1e5 + 3);
 
-#define foi(i, a, b) for (int i = a; i < b; i++)
-#define foI(i, a, b) for (int i = a; i <= b; i++)
-#define fol(i, a, b) for (ll i = a; i < b; i++)
-#define foL(i, a, b) for (ll i = a; i <= b; i++)
+#define fo(i, a, b) for (int i = a; i <= b; i++)
 
 //* char a = 'A';   int num = (int) a;
 //* char a = '2';   int num = a-48;
@@ -98,40 +95,72 @@ ll mod_add(ll a, ll b)
     return (((a + b) % mod) + mod) % mod;
 }
 
+bool cmp(pair<int, int> &a, pair<int, int> &b)
+{
+    return a.second < b.second;
+}
+
 int main()
 {
     fast;
-    ll n, k;
-    cin >> k >> n;
+    int t;
+    cin >> t;
 
-    if( n == 1) return 0 ;
-
-    vector<ll> v;
-    for (ll i = 1; i <= sqrt(n); i++)
+    while (t--)
     {
-        if (n % i == 0)
-        {   
-            if( i == 1) continue;
+        ll n;
+        cin >> n;
 
-            if (n / i == i)
-                v.push_back(i);
+        vll arr(n);
+        vll rank(n); 
+
+        for (int i = 0; i < n; i++)
+        {
+            cin >> arr[i];
+        }
+
+        string s;
+        cin >> s;
+
+        vector<pair<int, int>> trackliked;
+        vector<pair<int, int>> trackdisliked;
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            char c = s[i];
+            if (c == '1')
+            {
+                trackliked.push_back(make_pair(i, arr[i]));
+            }
+
             else
             {
-                v.push_back(i);
-                v.push_back(n / i);
+                trackdisliked.push_back(make_pair(i, arr[i]));
             }
         }
+
+        sort(trackliked.begin(), trackliked.end(), cmp);
+        sort(trackdisliked.begin(), trackdisliked.end(), cmp);
+
+        int k = 1;
+        for (auto it : trackdisliked)
+        {
+            // cout << it.second << " "<< it.first<<endl;
+            rank[it.first] = k;
+            k++;
+        }
+
+        for (auto its : trackliked)
+        {
+            // cout << its.second << " "<< its.first<<endl;
+            rank[its.first] = k;
+            k++;
+        }
+
+        for (auto it : rank)
+        {
+            cout << it << " ";
+        }
+        cout << endl;
     }
-
-    ll ans = 0 ; 
-
-    if(k >= n) ans = 2 ;
-    else ans = 0;
-
-    for(auto it : v)
-    {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
-    }
-    cout << ans << endl;
 }

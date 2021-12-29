@@ -49,8 +49,8 @@ using namespace std;
         cout << i << " "; \
     cout << endl;
 
-#define max3(a, b, c) max(max((a), (b)), (c))
-#define min3(a, b, c) min(min((a), (b)), (c))
+#define max3(a,b,c) max(max((a),(b)),(c))
+#define min3(a,b,c) min(min((a),(b)),(c))
 
 #define cin(n) cin >> n
 #define cin2(a, b) cin >> a >> b;
@@ -77,61 +77,28 @@ using namespace std;
 #define NINF numeric_limits<ll>::min();
 const int N = int(1e5 + 3);
 
-#define foi(i, a, b) for (int i = a; i < b; i++)
-#define foI(i, a, b) for (int i = a; i <= b; i++)
-#define fol(i, a, b) for (ll i = a; i < b; i++)
-#define foL(i, a, b) for (ll i = a; i <= b; i++)
+#define fo(i, a, b) for (int i = a; i <= b; i++)
 
 //* char a = 'A';   int num = (int) a;
 //* char a = '2';   int num = a-48;
 
-ll mod_mul(ll a, ll b)
-{
-    a = a % mod;
-    b = b % mod;
-    return (((a * b) % mod) + mod) % mod;
-}
-ll mod_add(ll a, ll b)
-{
-    a = a % mod;
-    b = b % mod;
-    return (((a + b) % mod) + mod) % mod;
-}
+ll mod_mul(ll a, ll b) {a = a % mod; b = b % mod; return (((a * b) % mod) + mod) % mod;}
+ll mod_add(ll a, ll b) {a = a % mod; b = b % mod; return (((a + b) % mod) + mod) % mod;}
 
 int main()
 {
     fast;
-    ll n, k;
-    cin >> k >> n;
-
-    if( n == 1) return 0 ;
-
-    vector<ll> v;
-    for (ll i = 1; i <= sqrt(n); i++)
+    int t;
+    cin >> t;
+    
+    while(t--)
     {
-        if (n % i == 0)
-        {   
-            if( i == 1) continue;
+        int n ; 
+        cin >> n ;
 
-            if (n / i == i)
-                v.push_back(i);
-            else
-            {
-                v.push_back(i);
-                v.push_back(n / i);
-            }
-        }
+        if( 360 % (180 - n) == 0) cout << "YES" <<endl;
+        else cout << "NO"  << endl;
+
     }
-
-    ll ans = 0 ; 
-
-    if(k >= n) ans = 2 ;
-    else ans = 0;
-
-    for(auto it : v)
-    {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
-    }
-    cout << ans << endl;
+    
 }

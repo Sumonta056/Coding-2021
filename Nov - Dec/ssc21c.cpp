@@ -101,37 +101,61 @@ ll mod_add(ll a, ll b)
 int main()
 {
     fast;
-    ll n, k;
-    cin >> k >> n;
-
-    if( n == 1) return 0 ;
-
-    vector<ll> v;
-    for (ll i = 1; i <= sqrt(n); i++)
+    int t;
+    cin >> t;
+    while (t--)
     {
-        if (n % i == 0)
-        {   
-            if( i == 1) continue;
+        ll n , k ;
+        cin >> n >> k ;
+        
+        string s ;
+        cin >> s ;
 
-            if (n / i == i)
-                v.push_back(i);
-            else
+        string ans;
+        int count1 = 0;
+        bool Done = false;
+
+        for (int i = 0; i < n; ++i)
+        {
+            if (s[i] == '0')
             {
-                v.push_back(i);
-                v.push_back(n / i);
+                if (count1 <= k)
+                {
+                    ans += '0';
+                    //cout <<1<<ans<<endl;
+                    
+                    k -= count1;
+                    //cout << k <<endl ;
+                }
+                else
+                {
+                    //cout << k <<endl;
+                    ans += string(count1 - k, '1');
+                    //cout <<2<<ans<<endl;
+                    ans += '0';
+                    //cout <<2<<ans<<endl;
+                    ans += string(k, '1');
+                    //cout <<2<<ans<<endl;
+                    ans += s.substr(i + 1);
+                    //cout <<3<<ans<<endl;
+                    cout << ans << endl;
+
+
+                    Done = true;
+                    break;
+                }
             }
+            else count1++;
+    
         }
+
+        if (!Done) 
+        {
+            // cout << s <<endl;
+            ans += string(count1, '1');
+			cout << ans << endl;
+        }
+    
     }
 
-    ll ans = 0 ; 
-
-    if(k >= n) ans = 2 ;
-    else ans = 0;
-
-    for(auto it : v)
-    {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
-    }
-    cout << ans << endl;
 }

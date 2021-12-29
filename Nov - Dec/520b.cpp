@@ -101,37 +101,27 @@ ll mod_add(ll a, ll b)
 int main()
 {
     fast;
-    ll n, k;
-    cin >> k >> n;
 
-    if( n == 1) return 0 ;
+    ll n, m;
+    cin >> n >> m;
 
-    vector<ll> v;
-    for (ll i = 1; i <= sqrt(n); i++)
+    if (n == m)
+        cout << 0 << endl;
+    else if (n > m)
+        cout << n - m << endl;
+
+    else
     {
-        if (n % i == 0)
-        {   
-            if( i == 1) continue;
-
-            if (n / i == i)
-                v.push_back(i);
+        int count = 0;
+        while (m != n)
+        {
+            if (m > n && (m % 2 == 0))
+                m /= 2;
             else
-            {
-                v.push_back(i);
-                v.push_back(n / i);
-            }
+                m++;
+            count++;
         }
+
+        cout << count << endl;
     }
-
-    ll ans = 0 ; 
-
-    if(k >= n) ans = 2 ;
-    else ans = 0;
-
-    for(auto it : v)
-    {
-        if(it > 1 && it <= k ) ans++;
-        //cout << it << " ";
-    }
-    cout << ans << endl;
 }

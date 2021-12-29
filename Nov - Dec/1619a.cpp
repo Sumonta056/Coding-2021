@@ -106,6 +106,7 @@ int main()
         string s;
         cin >> s;
 
+
         int size = s.length();
 
         if (size % 2 != 0)
